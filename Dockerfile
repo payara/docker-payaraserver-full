@@ -20,7 +20,7 @@ RUN useradd -b /opt -m -s /bin/bash -d $PAYARA_PATH payara && echo payara:payara
 RUN chown -R payara:payara /opt
 
 # Default payara ports to expose
-EXPOSE 4848 8009 8080 8181
+EXPOSE 4848 8009 8080 8181 1527
 
 USER payara
 WORKDIR $PAYARA_PATH
