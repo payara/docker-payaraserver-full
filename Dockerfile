@@ -6,7 +6,7 @@ RUN \
 
 ENV ADMIN_USER admin
 
-ENV PAYARA_PATH /opt/payara50
+ENV PAYARA_PATH /opt/payara5
 
 RUN \ 
  mkdir -p ${PAYARA_PATH}/deployments && \
