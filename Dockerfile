@@ -1,4 +1,4 @@
-FROM openjdk:8-jdk
+FROM openjdk:8u181-jdk
 
 RUN \
  apt-get update && \ 
