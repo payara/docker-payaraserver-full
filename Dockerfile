@@ -1,4 +1,4 @@
-FROM openjdk:8u171-jdk
+FROM azul/zulu-openjdk:8u212
 
 # Default payara ports to expose
 # 4848: admin console
@@ -39,7 +39,11 @@ RUN groupadd -g 1000 payara && \
     mkdir -p ${DEPLOY_DIR} && \
     mkdir -p ${CONFIG_DIR} && \
     mkdir -p ${SCRIPT_DIR} && \
-    chown -R payara: ${HOME_DIR}
+    chown -R payara: ${HOME_DIR} && \
+    # Install required packages
+    apt-get update && \
+    apt-get install -y wget unzip && \
+    rm -rf /var/lib/apt/lists/*
 
 # Install tini as minimized init system
 RUN wget --no-verbose -O /tini https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini && \
