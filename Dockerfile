@@ -25,6 +25,7 @@ ENV HOME_DIR=/opt/payara\
     ADMIN_USER=admin\
     ADMIN_PASSWORD=admin \
     # Utility environment variables
+    MAX_RAM_PERCENTAGE=25.00\
     JVM_ARGS=\
     PAYARA_ARGS=\
     DEPLOY_PROPS=\
@@ -70,6 +71,7 @@ RUN wget --no-verbose -O payara.zip ${PAYARA_PKG} && \
     for MEMORY_JVM_OPTION in $(${PAYARA_DIR}/bin/asadmin --user=${ADMIN_USER} --passwordfile=${PASSWORD_FILE} list-jvm-options | grep "Xm[sx]"); do\
         ${PAYARA_DIR}/bin/asadmin --user=${ADMIN_USER} --passwordfile=${PASSWORD_FILE} delete-jvm-options $MEMORY_JVM_OPTION;\
     done && \
+    ${PAYARA_DIR}/bin/asadmin --user=${ADMIN_USER} --passwordfile=${PASSWORD_FILE} create-jvm-options '-XX\:MaxRAMPercentage=${ENV=MAX_RAM_PERCENTAGE}' && \
     ${PAYARA_DIR}/bin/asadmin --user=${ADMIN_USER} --passwordfile=${PASSWORD_FILE} set-log-attributes com.sun.enterprise.server.logging.GFFileHandler.logtoFile=false && \
     ${PAYARA_DIR}/bin/asadmin --user=${ADMIN_USER} --passwordfile=${PASSWORD_FILE} stop-domain ${DOMAIN_NAME} && \
     # Cleanup unused files
