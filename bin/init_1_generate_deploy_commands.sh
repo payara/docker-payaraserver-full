@@ -49,6 +49,8 @@ deploy() {
 	fi
 }
 
+echo "\n" >> $POSTBOOT_COMMANDS;
+
 # RAR files first
 for deployment in $(find $DEPLOY_DIR -mindepth 1 -maxdepth 1 -name "*.rar");
 do
