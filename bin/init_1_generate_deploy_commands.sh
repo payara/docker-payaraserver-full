@@ -45,6 +45,10 @@ deploy() {
 		echo "post boot commands already deploys $1";
 	else
 		echo "Adding deployment target $1 to post boot commands";
+                if test "$NEWLINE"x = x; then 
+                    printf "\n" >> $POSTBOOT_COMMANDS; 
+                    NEWLINE=1;
+                fi
 		echo $DEPLOY_STATEMENT >> $POSTBOOT_COMMANDS;
 	fi
 }
